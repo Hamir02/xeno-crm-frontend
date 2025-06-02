@@ -1,38 +1,132 @@
+/* Base layout */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0f172a !important;
+  color: #f1f5f9;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Center the login/signup containers */
+.signup-wrapper,
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.85);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: darken;
+}
+
+/* Main container for all forms */
 .App {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  padding: 40px;
+  background-color: rgba(30, 41, 59, 0.92);
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Brand header */
+.brand {
+  font-size: 32px;
+  font-weight: bold;
+  color: #e2e8f0;
+  margin-bottom: 12px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.subtitle {
+  font-size: 18px;
+  color: #94a3b8;
+  margin-bottom: 30px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* Input fields */
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #334155;
+  color: #f8fafc;
+  font-size: 1rem;
+}
+
+input::placeholder {
+  color: #94a3b8;
+}
+
+/* Buttons */
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 14px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Google button style */
+.google-login-btn {
+  background-color: #22c55e;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.google-login-btn:hover {
+  background-color: #16a34a;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Utility buttons */
+button.blue {
+  background-color: #3b82f6;
+  color: white;
+}
+
+button.green {
+  background-color: #22c55e;
+  color: white;
+}
+
+button.purple {
+  background-color: #9333ea;
+  color: white;
+}
+
+/* Hover styles */
+button:hover {
+  opacity: 0.95;
+}
+
+/* Error message */
+.error {
+  color: #f87171;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* Message box */
+.message-box {
+  background-color: #f1f5f9;
+  color: #1e293b;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  text-align: left;
 }

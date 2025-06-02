@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import LoginPage from './LoginPage';
+import Dashboard from './Dashboard';
+import CampaignHistory from './CampaignHistory';
+import Signup from './Signup'; // ✅ Make sure this import is correct
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  const handleLogout = () => setUser(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<LoginPage setUser={setUser} />} />
+      <Route path="/signup" element={<Signup />} /> {/* ✅ Add this line */}
+      <Route path="/dashboard" element={<Dashboard user={user} onLogout={handleLogout} />} />
+      <Route path="/campaign-history" element={<CampaignHistory />} />
+    </Routes>
   );
 }
 
