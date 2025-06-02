@@ -10,7 +10,7 @@ const LoginPage = ({ setUser }) => {
     const credential = credentialResponse.credential;
 
     try {
-      const res = await fetch('http://localhost:3001/api/google', {
+      const res = await fetch('https://xeno-crm-backend-zlmh.onrender.com/api/google', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ credential }),
