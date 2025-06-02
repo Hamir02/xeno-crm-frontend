@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const CreateCampaign = () => {
+  const API_BASE = 'https://xeno-crm-backend-zlmh.onrender.com'; // ✅ Render backend base URL
+
   const [campaignName, setCampaignName] = useState('');
   const [field, setField] = useState('');
   const [operator, setOperator] = useState('');
@@ -24,7 +26,7 @@ const CreateCampaign = () => {
     };
 
     try {
-      const res = await axios.post('http://localhost:3000/api/campaigns', campaign);
+      const res = await axios.post(`${API_BASE}/api/campaigns`, campaign);
       alert('Campaign created ✅');
       console.log(res.data);
     } catch (err) {
@@ -36,7 +38,7 @@ const CreateCampaign = () => {
   const getAISuggestion = async () => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:3000/api/ai/generate-message', {
+      const res = await axios.post(`${API_BASE}/api/ai/generate-message`, {
         audienceDescription: `Users with ${field} ${operator} ${value}`,
       });
       setAiMessage(res.data.message);
@@ -70,7 +72,7 @@ const CreateCampaign = () => {
 
         <input
           type="text"
-          placeholder="Operator (e.g., >, <, =)"
+          placeholder="Operator (e.g., gt, lt, eq)"
           value={operator}
           onChange={(e) => setOperator(e.target.value)}
           required

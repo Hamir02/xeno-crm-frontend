@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Dashboard = ({ user, onLogout }) => {
+  const API_BASE = 'https://xeno-crm-backend-zlmh.onrender.com'; // ✅ Render backend base URL
+
   const [rules, setRules] = useState([{ field: 'totalSpend', operator: 'gt', value: '' }]);
   const [campaignName, setCampaignName] = useState('');
   const [createMessage, setCreateMessage] = useState('');
@@ -38,7 +40,7 @@ const Dashboard = ({ user, onLogout }) => {
   const handleCreateSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3001/api/campaigns', {
+      await axios.post(`${API_BASE}/api/campaigns`, {
         campaignName,
         rules,
         aiMessage,
@@ -59,7 +61,7 @@ const Dashboard = ({ user, onLogout }) => {
       return;
     }
     try {
-      const res = await axios.post(`http://localhost:3001/api/send-campaign/${campaignId}`);
+      const res = await axios.post(`${API_BASE}/api/send-campaign/${campaignId}`);
       setSendMessage(`✅ Sent to ${res.data.totalMatched} customers (Campaign: ${res.data.campaign})`);
       setDeliveryLogs(res.data.deliveryLogs);
     } catch (err) {
@@ -77,7 +79,7 @@ const Dashboard = ({ user, onLogout }) => {
     setLoading(true);
     try {
       const audienceDescription = rules.map(rule => `${rule.field} ${rule.operator} ${rule.value}`).join(' AND ');
-      const res = await axios.post('http://localhost:3001/api/ai/generate-message', { audienceDescription });
+      const res = await axios.post(`${API_BASE}/api/ai/generate-message`, { audienceDescription });
       setAiMessage(res.data.message);
     } catch (error) {
       alert('❌ Failed to generate AI message');
@@ -96,7 +98,7 @@ const Dashboard = ({ user, onLogout }) => {
       const failed = deliveryLogs.filter(log => log.status === 'FAILED').length;
       const highSpenderRate = 90;
 
-      const res = await axios.post('http://localhost:3001/api/ai/summary', {
+      const res = await axios.post(`${API_BASE}/api/ai/summary`, {
         total,
         delivered,
         failed,

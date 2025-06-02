@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 function CampaignHistory() {
+  const API_BASE = 'https://xeno-crm-backend-zlmh.onrender.com'; // ✅ Render backend base URL
+
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [summary, setSummary] = useState('');
@@ -9,7 +11,7 @@ function CampaignHistory() {
 
   // Fetch saved campaigns
   useEffect(() => {
-    fetch('http://localhost:3001/api/campaigns')
+    fetch(`${API_BASE}/api/campaigns`)
       .then(res => res.json())
       .then(data => {
         setCampaigns(data);
@@ -27,7 +29,7 @@ function CampaignHistory() {
     setError('');
 
     try {
-      const res = await fetch('http://localhost:3001/api/ai/summary', {
+      const res = await fetch(`${API_BASE}/api/ai/summary`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -35,7 +37,7 @@ function CampaignHistory() {
           delivered: 850,
           failed: 150,
           highSpenderRate: 78
-        }) // You can use real stats if you store them
+        }) // Optional: you can use real stats if available
       });
 
       const data = await res.json();
